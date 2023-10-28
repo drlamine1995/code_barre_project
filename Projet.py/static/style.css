@@ -14,15 +14,8 @@ body {
 }
 
 /* Style des titres */
-h1 {
-    font-size: 24px;
+h1, h2 {
     margin-bottom: 20px;
-}
-
-h2 {
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 10px;
 }
 
 /* Style des formulaires */

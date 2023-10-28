@@ -18,9 +18,6 @@ Dans le git commit ,    shortcut i pour insert et esc pour sortir
 
 On peut utiliser le -m directement pour ne pas lancer l'editeur de text 
 
-# Partie Docker :
-Docker-compose comprend actuellement une base de donnée postgress et une interface pour y naviger
-
 # code_barre_project
 
 ## Objectif du projet
