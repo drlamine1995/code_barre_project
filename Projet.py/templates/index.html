@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Suivi des Bouteilles de Gaz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Suivi des Bouteilles de Gaz</h1>
+
+    <form method="POST" action="/search">
+        <label for="code_barres">Rechercher par Code-barres :</label>
+        <input type="text" id="code_barres" name="code_barres" placeholder="Entrez le code-barres">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <h2>Liste des Bouteilles de Gaz</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Code-barres</th>
+                <th>Numéro de Machine</th>
+                <th>Description</th>
+                <th>Quantité</th>
+                <th>Emplacement</th>
+                <th>Date d'Ajout</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bouteille in bouteilles %}
+                <tr>
+                    <td>{{ bouteille.code_barres }}</td>
+                    <td>{{ bouteille.numero_machine }}</td>
+                    <td>{{ bouteille.description }}</td>
+                    <td>{{ bouteille.quantite }}</td>
+                    <td>{{ bouteille.emplacement }}</td>
+                    <td>{{ bouteille.date_ajout }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
