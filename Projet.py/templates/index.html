@@ -9,7 +9,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Suivi des Bouteilles de Gaz</h1>
-        <form method="POST" action="/search" class="mb-4">
+        <form id="searchForm" method="POST" class="mb-4">
             <div class="form-group">
                 <label for="code_barres">Rechercher par Code-barres :</label>
                 <div class="input-group">
@@ -20,6 +20,7 @@
                 </div>
             </div>
         </form>
+        <div id="searchResults"></div>
         <h2>Liste des Bouteilles de Gaz</h2>
         <table class="table table-bordered table-striped">
             <thead>

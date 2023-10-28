@@ -1,32 +1,34 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const searchForm = document.getElementById('search-form');
-    const resultDiv = document.getElementById('result');
+document.addEventListener("DOMContentLoaded", function() {
 
-    searchForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const code_barres = document.getElementById('code_barres').value;
+    // Intercepte la soumission du formulaire de recherche
+    document.getElementById("searchForm").addEventListener("submit", function(event){
+        event.preventDefault();  // Empêche le rechargement de la page
 
-        fetch('/search', {
-            method: 'POST',
-            body: new URLSearchParams({ code_barres }),
+        let codeBarres = document.getElementById("code_barres").value;
+
+        fetch("/search", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                "Content-Type": "application/x-www-form-urlencoded",
             },
+            body: "code_barres=" + codeBarres
         })
         .then(response => response.json())
         .then(data => {
+            let resultsDiv = document.getElementById("searchResults");
             if (data.message) {
-                resultDiv.innerHTML = `<p>${data.message}</p>`;
+                resultsDiv.innerHTML = data.message;
             } else {
-                resultDiv.innerHTML = `
-                    <p>Description : ${data.description}</p>
-                    <p>Quantité : ${data.quantite}</p>
-                    <p>Emplacement : ${data.emplacement}</p>
-                `;
+                resultsDiv.innerHTML = "Code Barres: " + data.code_barres + "<br>" +
+                                       "Numéro Machine: " + data.numero_machine + "<br>" +
+                                       "Description: " + data.description + "<br>" +
+                                       "Quantité: " + data.quantite + "<br>" +
+                                       "Emplacement: " + data.emplacement + "<br>" +
+                                       "Date d'Ajout: " + data.date_ajout;
             }
-        })
-        .catch(error => {
-            console.error('Erreur :', error);
         });
     });
+
+    // Vous pouvez ajouter d'autres fonctions ou scripts ici si nécessaire
+
 });

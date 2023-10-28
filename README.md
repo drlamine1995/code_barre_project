@@ -10,6 +10,10 @@ git commit
 git commit -m "first commit"
 git branch -M main
 git push -u origin main
+
+git add --all
+git commit -m "modification des scipt js et index"
+git push origin main
 ```
 
 Dans le git commit ,    shortcut i pour insert et esc pour sortir 
