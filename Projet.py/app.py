@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import psycopg2
 
 app = Flask(__name__)
@@ -26,31 +26,23 @@ def index():
 
 @app.route('/lecture_code_barre', methods=['GET', 'POST'])
 def lecture_code_barre():
-    if request.method == 'GET':
-        return render_template('lecture_code_barre.html')
     if request.method == 'POST':
-        code_barre = request.form.get('code_barre')
-        conn = connect_to_database()
-        if conn is None:
-            return "Erreur de connexion à la base de données."
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM bouteilles_de_gaz WHERE code_barres = %s", (code_barre,))
-        bouteille = cur.fetchone()
-        cur.close()
-        if bouteille:
-            return render_template('details_bouteille.html', bouteille=bouteille)
-        else:
-            return "Bouteille non trouvée."
+        code_barres = request.form['code_barres']
+        return redirect(url_for('details_bouteille', code_barres=code_barres))
+    return render_template('lecture_code_barre.html')
 
 @app.route('/table_bouteille')
 def table_bouteille():
     conn = connect_to_database()
     if conn is None:
         return "Erreur de connexion à la base de données."
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM bouteilles_de_gaz")
-    bouteilles = cur.fetchall()
-    cur.close()
+
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM bouteilles_de_gaz")
+    bouteilles = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
     return render_template('table_bouteille.html', bouteilles=bouteilles)
 
 @app.route('/edit/<int:bouteille_id>', methods=['GET', 'POST'])
@@ -118,6 +110,7 @@ def add_bouteille():
         conn.close()
 
         return "Bouteille ajoutée avec succès."
-
+    
+    
 if __name__ == '__main__':
     app.run(debug=True)
