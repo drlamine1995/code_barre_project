@@ -1,37 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter une Nouvelle Bouteille de Gaz</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter Bouteille</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Ajouter une Nouvelle Bouteille de Gaz</h1>
-        <form method="POST" action="/add">
-            <div class="form-group">
-                <label for="code_barres">Code-barres :</label>
-                <input type="text" class="form-control" id="code_barres" name="code_barres" required>
-            </div>
-            <div class="form-group">
-                <label for="numero_machine">Identifiant de la Machine :</label>
-                <input type="text" class="form-control" id="numero_machine" name="numero_machine" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Description :</label>
-                <input type="text" class="form-control" id="description" name="description">
-            </div>
-            <div class="form-group">
-                <label for="quantite">Quantité :</label>
-                <input type="number" class="form-control" id="quantite" name="quantite">
-            </div>
-            <div class="form-group">
-                <label for="emplacement">Emplacement :</label>
-                <input type="text" class="form-control" id="emplacement" name="emplacement">
-            </div>
-            <button type="submit" class="btn btn-primary">Ajouter</button>
-        </form>
-    </div>
+    <h2>Ajouter une nouvelle bouteille</h2>
+    <form action="/add" method="post">
+        <label for="code_barres">Code-barres:</label>
+        <input type="text" id="code_barres" name="code_barres">
+        <label for="numero_machine">Numéro machine:</label>
+        <input type="text" id="numero_machine" name="numero_machine">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description">
+        <label for="quantite">Quantité:</label>
+        <input type="text" id="quantite" name="quantite">
+        <label for="emplacement">Emplacement:</label>
+        <input type="text" id="emplacement" name="emplacement">
+        <input type="submit" value="Ajouter">
+    </form>
 </body>
 </html>

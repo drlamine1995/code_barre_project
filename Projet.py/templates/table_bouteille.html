@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Bouteille</title>
+</head>
+<body>
+    <h2>Table des bouteilles</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Code-barres</th>
+                <th>Numéro machine</th>
+                <th>Description</th>
+                <th>Quantité</th>
+                <th>Emplacement</th>
+                <th>Date d'ajout</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bouteille in bouteilles %}
+                <tr>
+                    <td>{{ bouteille[1] }}</td>
+                    <td>{{ bouteille[2] }}</td>
+                    <td>{{ bouteille[3] }}</td>
+                    <td>{{ bouteille[4] }}</td>
+                    <td>{{ bouteille[5] }}</td>
+                    <td>{{ bouteille[6] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

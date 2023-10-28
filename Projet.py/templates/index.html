@@ -1,56 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Suivi des Bouteilles de Gaz</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="container text-center mt-5">
-        <button class="btn btn-primary mb-3" onclick="location.href='/lecture_code_barre'">Lecture Code-barre</button>
-        <button class="btn btn-secondary mb-3" onclick="location.href='/table_bouteille'">Table bouteille</button>
-        <button class="btn btn-success" onclick="location.href='/ajouter_modifier'">Ajouter / Modifier</button>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+        <a href="/lecture_code_barre"><button>Lecture Code-barre</button></a>
+        <a href="/table_bouteille"><button>Table bouteille</button></a>
+        <a href="/add"><button>Ajouter / Modifier</button></a>
     </div>
-        <form id="searchForm" method="POST" class="mb-4">
-            <div class="form-group">
-                <label for="code_barres">Rechercher par Code-barres :</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="code_barres" name="code_barres" placeholder="Entrez le code-barres">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Rechercher</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div id="searchResults"></div>
-        <h2>Liste des Bouteilles de Gaz</h2>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Code-barres</th>
-                    <th>Numéro de Machine</th>
-                    <th>Description</th>
-                    <th>Quantité</th>
-                    <th>Emplacement</th>
-                    <th>Date d'Ajout</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for bouteille in bouteilles %}
-                    <tr>
-                        <td>{{ bouteille.code_barres }}</td>
-                        <td>{{ bouteille.numero_machine }}</td>
-                        <td>{{ bouteille.description }}</td>
-                        <td>{{ bouteille.quantite }}</td>
-                        <td>{{ bouteille.emplacement }}</td>
-                        <td>{{ bouteille.date_ajout }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -22,44 +22,37 @@ def connect_to_database():
 
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route('/lecture_code_barre', methods=['GET', 'POST'])
+def lecture_code_barre():
+    if request.method == 'GET':
+        return render_template('lecture_code_barre.html')
+    if request.method == 'POST':
+        code_barre = request.form.get('code_barre')
+        conn = connect_to_database()
+        if conn is None:
+            return "Erreur de connexion à la base de données."
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM bouteilles_de_gaz WHERE code_barres = %s", (code_barre,))
+        bouteille = cur.fetchone()
+        cur.close()
+        if bouteille:
+            return render_template('details_bouteille.html', bouteille=bouteille)
+        else:
+            return "Bouteille non trouvée."
+
+@app.route('/table_bouteille')
+def table_bouteille():
     conn = connect_to_database()
     if conn is None:
         return "Erreur de connexion à la base de données."
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM bouteilles_de_gaz")
+    bouteilles = cur.fetchall()
+    cur.close()
+    return render_template('table_bouteille.html', bouteilles=bouteilles)
 
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM bouteilles_de_gaz")
-    bouteilles = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    
-    return render_template('index.html', bouteilles=bouteilles)
-
-@app.route('/search', methods=['POST'])
-def search():
-    conn = connect_to_database()
-    if conn is None:
-        return jsonify({"message": "Erreur de connexion à la base de données."}), 500
-
-    code_barres = request.form['code_barres']
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM bouteilles_de_gaz WHERE code_barres = %s", (code_barres,))
-    bouteille = cursor.fetchone()
-    cursor.close()
-    conn.close()
-
-    if bouteille is not None:
-        bouteille_data = {
-            "code_barres": bouteille[1],
-            "numero_machine": bouteille[2],
-            "description": bouteille[3],
-            "quantite": bouteille[4],
-            "emplacement": bouteille[5],
-            "date_ajout": bouteille[6]
-        }
-        return jsonify(bouteille_data)
-    else:
-        return jsonify({"message": "Bouteille non trouvée"}), 404
-    
 @app.route('/edit/<int:bouteille_id>', methods=['GET', 'POST'])
 def edit_bouteille(bouteille_id):
     conn = connect_to_database()
@@ -125,7 +118,6 @@ def add_bouteille():
         conn.close()
 
         return "Bouteille ajoutée avec succès."
-
 
 if __name__ == '__main__':
     app.run(debug=True)
