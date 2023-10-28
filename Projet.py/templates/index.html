@@ -8,7 +8,11 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Suivi des Bouteilles de Gaz</h1>
+        <div class="container text-center mt-5">
+        <button class="btn btn-primary mb-3" onclick="location.href='/lecture_code_barre'">Lecture Code-barre</button>
+        <button class="btn btn-secondary mb-3" onclick="location.href='/table_bouteille'">Table bouteille</button>
+        <button class="btn btn-success" onclick="location.href='/ajouter_modifier'">Ajouter / Modifier</button>
+    </div>
         <form id="searchForm" method="POST" class="mb-4">
             <div class="form-group">
                 <label for="code_barres">Rechercher par Code-barres :</label>

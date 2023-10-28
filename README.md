@@ -29,6 +29,8 @@ Le projet est une application web conçue pour gérer des bouteilles de gaz. L'a
 
 ## Fonctionnalités principales
 
+![Alt text](image.png)
+
 ### 1. Gestion des bouteilles de gaz
 - L'application offre des fonctionnalités CRUD (Création, Lecture, Mise à jour, Suppression) pour les bouteilles de gaz.
 - Les utilisateurs peuvent ajouter de nouvelles bouteilles, les modifier, les rechercher par code-barres et les supprimer.
