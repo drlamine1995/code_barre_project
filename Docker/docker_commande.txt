@@ -1,0 +1,46 @@
+  21 docker-compose up -d
+  22 docker ps -a
+  23 docker stop f89bd1db16a3
+  24 docker stop 8617ff98f2b8
+
+INSERT INTO public.bouteilles_de_gaz (code_barres, numero_machine, description, quantite, emplacement, date_ajout)
+VALUES
+    ('12345678901234567890', 'Machine1', 'azote', 10, 'Entrepôt A', '2023-10-23 08:00:00'),
+    ('98765432109876543210', 'Machine2', 'oxygène', 15, 'Entrepôt B', '2023-10-22 10:30:00'),
+    ('56789012345678901234', 'Machine3', 'Bouteille de gaz carbonique', 5, 'Entrepôt A', '2023-10-21 14:15:00'),
+    ('11111111111111111111', 'Machine4', 'argon', 8, 'Entrepôt C', '2023-10-20 16:45:00'),
+    ('22222222222222222222', 'Machine5', 'hélium', 12, 'Entrepôt B', '2023-10-19 09:20:00'),
+    ('33333333333333333333', 'Machine1', 'azote', 7, 'Entrepôt A', '2023-10-18 11:55:00'),
+    ('44444444444444444444', 'Machine2', 'oxygène', 9, 'Entrepôt C', '2023-10-17 13:40:00'),
+    ('55555555555555555555', 'Machine3', 'Bouteille de gaz carbonique', 6, 'Entrepôt B', '2023-10-16 15:10:00'),
+    ('66666666666666666666', 'Machine4', 'argon', 11, 'Entrepôt A', '2023-10-15 07:30:00'),
+    ('77777777777777777777', 'Machine5', 'hélium', 14, 'Entrepôt C', '2023-10-14 12:25:00'),
+    ('88888888888888888888', 'Machine1', 'azote', 10, 'Entrepôt A', '2023-10-13 18:05:00'),
+    ('99999999999999999999', 'Machine2', 'oxygène', 15, 'Entrepôt B', '2023-10-12 22:40:00'),
+    ('12121212121212121212', 'Machine3', 'Bouteille de gaz carbonique', 5, 'Entrepôt A', '2023-10-11 10:15:00'),
+    ('13131313131313131313', 'Machine4', 'argon', 8, 'Entrepôt C', '2023-10-10 14:50:00'),
+    ('14141414141414141414', 'Machine5', 'hélium', 12, 'Entrepôt B', '2023-10-09 16:30:00'),
+    ('15151515151515151515', 'Machine1', 'azote', 7, 'Entrepôt A', '2023-10-08 20:45:00'),
+    ('16161616161616161616', 'Machine2', 'oxygène', 9, 'Entrepôt C', '2023-10-07 11:20:00'),
+    ('17171717171717171717', 'Machine3', 'Bouteille de gaz carbonique', 6, 'Entrepôt B', '2023-10-06 09:55:00'),
+    ('18181818181818181818', 'Machine4', 'argon', 11, 'Entrepôt A', '2023-10-05 14:15:00'),
+    ('19191919191919191919', 'Machine5', 'hélium', 14, 'Entrepôt C', '2023-10-04 08:30:00'),
+    ('20202020202020202020', 'Machine1', 'azote', 10, 'Entrepôt A', '2023-10-03 12:10:00');
+
+
+-- Créez la séquence
+CREATE SEQUENCE bouteilles_de_gaz_id_seq;
+
+-- Créez la table en utilisant la séquence pour la colonne "id"
+CREATE TABLE IF NOT EXISTS public.bouteilles_de_gaz
+(
+    id integer NOT NULL DEFAULT nextval('bouteilles_de_gaz_id_seq'::regclass),
+    code_barres character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    numero_machine character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    description character varying(255) COLLATE pg_catalog."default",
+    quantite integer,
+    emplacement character varying(100) COLLATE pg_catalog."default",
+    date_ajout timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT bouteilles_de_gaz_pkey PRIMARY KEY (id),
+    CONSTRAINT bouteilles_de_gaz_code_barres_key UNIQUE (code_barres)
+);
