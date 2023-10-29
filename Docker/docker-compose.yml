@@ -8,11 +8,13 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
-
     volumes:
       - ./data:/var/lib/postgresql/data
 
   phppgadmin:
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+      - ./pgpassfile:/pgpassfile
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: test@gmail.com
@@ -22,15 +24,9 @@ services:
     depends_on:
       - db
 
-
-#   nginx:
-#     image: nginx:latest
-#     ports:
-#       - "80:80"
-#     volumes:
-#       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
-#     networks:
-#       - mon_reseau
-
-# networks:
-#   mon_reseau:
+  app:
+    image: webapp_code_barre
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db

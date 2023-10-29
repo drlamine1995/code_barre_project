@@ -1,7 +1,31 @@
-  21 docker-compose up -d
-  22 docker ps -a
-  23 docker stop f89bd1db16a3
-  24 docker stop 8617ff98f2b8
+docker-compose up -d
+docker ps -a
+
+docker-compose stop : arrête les conteneurs associés aux services sans les supprimer. manière propre
+Les conteneurs restent en place et peuvent être redémarrés ultérieurement en utilisant docker-compose start.
+
+docker-compose down : arrête également les conteneurs en supprimant également les conteneurs, les réseaux et les volumes associés 
+Toutes les ressources créées lors de l'exécution de docker-compose up seront nettoyées.
+docker-compose down est utile lorsque vous avez terminé de travailler avec vos services et que vous souhaitez libérer les ressources.
+
+
+-- Créez la séquence
+CREATE SEQUENCE bouteilles_de_gaz_id_seq;
+
+-- Créez la table en utilisant la séquence pour la colonne "id"
+CREATE TABLE IF NOT EXISTS public.bouteilles_de_gaz
+(
+    id integer NOT NULL DEFAULT nextval('bouteilles_de_gaz_id_seq'::regclass),
+    code_barres character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    numero_machine character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    description character varying(255) COLLATE pg_catalog."default",
+    quantite integer,
+    emplacement character varying(100) COLLATE pg_catalog."default",
+    date_ajout timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT bouteilles_de_gaz_pkey PRIMARY KEY (id),
+    CONSTRAINT bouteilles_de_gaz_code_barres_key UNIQUE (code_barres)
+);
+
 
 INSERT INTO public.bouteilles_de_gaz (code_barres, numero_machine, description, quantite, emplacement, date_ajout)
 VALUES
@@ -28,19 +52,3 @@ VALUES
     ('20202020202020202020', 'Machine1', 'azote', 10, 'Entrepôt A', '2023-10-03 12:10:00');
 
 
--- Créez la séquence
-CREATE SEQUENCE bouteilles_de_gaz_id_seq;
-
--- Créez la table en utilisant la séquence pour la colonne "id"
-CREATE TABLE IF NOT EXISTS public.bouteilles_de_gaz
-(
-    id integer NOT NULL DEFAULT nextval('bouteilles_de_gaz_id_seq'::regclass),
-    code_barres character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    numero_machine character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    description character varying(255) COLLATE pg_catalog."default",
-    quantite integer,
-    emplacement character varying(100) COLLATE pg_catalog."default",
-    date_ajout timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT bouteilles_de_gaz_pkey PRIMARY KEY (id),
-    CONSTRAINT bouteilles_de_gaz_code_barres_key UNIQUE (code_barres)
-);
