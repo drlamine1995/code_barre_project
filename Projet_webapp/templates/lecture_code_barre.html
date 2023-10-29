@@ -8,8 +8,12 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Lecture de Code-barre</h2>
         <a href="/" class="btn btn-secondary mb-3">Retour</a>
+        <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 100px;">
+            <h1>Carrefour des gaz</h1>
+        </div>
+        <h2 class="text-center mb-4">Lecture de Code-barre</h2>
         <form id="searchForm" action="#" method="post" class="text-center">
         <label for="code_barre" class="font-weight-bold">Entrez le code-barre:</label>
         <input type="text" id="code_barre" name="code_barre" class="form-control mb-3">

@@ -7,7 +7,11 @@
     <title>Modifier Bouteille</title>
 </head>
 <body>
-    <a href="/">Retour à l'accueil</a>
+        <a href="/" class="btn btn-secondary mb-3">Retour</a>
+    <div class="text-center mb-4">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="img-fluid" style="max-width: 100px;">
+        <h1>Carrefour des gaz</h1>
+    </div>
     <h2>Modifier la bouteille</h2>
     <form action="/edit/{{ bouteille[0] }}" method="post">
         <label for="code_barres">Code-barres:</label>

@@ -10,12 +10,17 @@
 <body>
         
         <div class="container mt-5 text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="img-fluid mb-4" style="max-width: 200px;">
+            <h2>Carrefour Des Gaz</h2>
             <h1>Gestion des Bouteilles</h1>
             <div class="mt-4">
                 <a href="/lecture_code_barre" class="btn btn-primary btn-lg mr-3">Lecture Code-barre</a>
                 <a href="/table_bouteille" class="btn btn-secondary btn-lg mr-3">Table bouteille</a>
                 <a href="/add" class="btn btn-success btn-lg">Ajouter / Modifier</a>
-            </div>
+                            </div>
+                        </div>
         </div>
     </div>
 </body>
