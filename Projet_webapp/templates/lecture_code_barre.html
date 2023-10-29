@@ -1,7 +1,7 @@
-<div id="result" class="result-container"></divdocument.getElementById('result').innerHTML `<div><strong>Code-barres:</strong> ${data.code_barres}</div><div><strong>Numéro de machine:</strong> ${data.numero_machine}</div><div><strong>Description:</strong> ${data.description}</div><div><strong>Quantité:</strong> ${data.quantite}</div><div><strong>Emplacement:</strong> ${data.emplacement}</div><div><strong>Date d'ajout:</strong> ${data.date_ajout}</div>`;
 <html lang="en">
 <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecture Code-barre</title>
@@ -14,10 +14,21 @@
         <label for="code_barre" class="font-weight-bold">Entrez le code-barre:</label>
         <input type="text" id="code_barre" name="code_barre" class="form-control mb-3">
         <input type="submit" value="Rechercher" class="btn btn-primary">
+    <div id="result-container" style="display: none;">
+        <div><strong>Code-barres:</strong> <span id="code-barres-result"></span></div>
+        <div><strong>Numéro de machine:</strong> <span id="numero-machine-result"></span></div>
+        <div><strong>Description:</strong> <span id="description-result"></span></div>
+        <div><strong>Quantité:</strong> <span id="quantite-result"></span></div>
+        <div><strong>Emplacement:</strong> <span id="emplacement-result"></span></div>
+        <div><strong>Date d'ajout:</strong> <span id="date-ajout-result"></span></div>
+    </div>
     </form>
     <div id="result" class="mt-4 text-center font-weight-bold"></div>
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
+                        // Clear previous results
+                        document.getElementById('result').textContent = '';
+                        document.getElementById('result-container').style.display = 'none';
             event.preventDefault();
             const codeBarresValue = document.getElementById('code_barre').value.trim();
             if (codeBarresValue) {
@@ -40,7 +51,13 @@
                         displayText += `Quantité: ${bouteilleData.quantite}\n`;
                         displayText += `Emplacement: ${bouteilleData.emplacement}\n`;
                         displayText += `Date d'ajout: ${bouteilleData.date_ajout}\n`;
-                        document.getElementById('result').textContent = displayText;
+                        document.getElementById('result-container').style.display = 'block';
+                                                document.getElementById('code-barres-result').textContent = bouteilleData.code_barres;
+                                                document.getElementById('numero-machine-result').textContent = bouteilleData.numero_machine;
+                                                document.getElementById('description-result').textContent = bouteilleData.description;
+                                                document.getElementById('quantite-result').textContent = bouteilleData.quantite;
+                                                document.getElementById('emplacement-result').textContent = bouteilleData.emplacement;
+                                                document.getElementById('date-ajout-result').textContent = bouteilleData.date_ajout;
                     }
                 });
             }
