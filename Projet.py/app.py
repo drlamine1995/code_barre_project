@@ -27,9 +27,38 @@ def index():
 @app.route('/lecture_code_barre', methods=['GET', 'POST'])
 def lecture_code_barre():
     if request.method == 'POST':
-        code_barres = request.form['code_barres']
-        return redirect(url_for('details_bouteille', code_barres=code_barres))
+        code_barre = request.json.get('code_barre')
+        if not code_barre:
+            return jsonify({'error': 'Veuillez entrer un code-barres.'}), 400
+        
+        conn = connect_to_database()
+        if conn is None:
+            return jsonify({'error': 'Erreur de connexion à la base de données.'}), 500
+
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM bouteilles_de_gaz WHERE code_barres = %s", (code_barre,))
+        bouteille = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if bouteille:
+            return jsonify({
+                'result': f"Résultat pour le code-barres: {code_barre}",
+                'data': {
+                    'id': bouteille[0],
+                    'code_barres': bouteille[1],
+                    'numero_machine': bouteille[2],
+                    'description': bouteille[3],
+                    'quantite': bouteille[4],
+                    'emplacement': bouteille[5],
+                    'date_ajout': bouteille[6].strftime('%Y-%m-%d %H:%M:%S')
+                }
+            })
+        else:
+            return jsonify({'error': 'Aucune bouteille trouvée avec ce code-barres.'}), 404
+
     return render_template('lecture_code_barre.html')
+
 
 @app.route('/table_bouteille')
 def table_bouteille():

@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", function() {
     searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
         const codeBarresValue = codeBarresInput.value.trim();
-        if (codeBarresValue) {
-            window.location.href = `/details_bouteille/${codeBarresValue}`;
+        if (!codeBarresValue) {
+            event.preventDefault();
+            alert("Veuillez entrer un code barre.");
+    
         }
     });
 });

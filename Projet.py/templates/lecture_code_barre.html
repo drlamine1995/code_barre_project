@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecture Code-barre</title>
 </head>
 <body>
-    <form action="/details_bouteille" method="post"></form>
-    <form action="/details_bouteille" method="post"> 
+    <div class="container mt-5">
+        <a href="/" class="btn btn-secondary mb-3">Retour</a>
+        <form id="searchForm" action="#" method="post" class="text-center">
         <label for="code_barre">Entrez le code-barre:</label>
-        <input type="text" id="code_barre" name="code_barre">
-        <input type="submit" value="Rechercher"></form>
+        <input type="text" id="code_barre" name="code_barre" class="form-control mb-3">
+        <input type="submit" value="Rechercher" class="btn btn-primary">
     </form>
-    
+    <div id="result" class="mt-4 text-center"></div>
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const codeBarresValue = document.getElementById('code_barre').value.trim();
+            if (codeBarresValue) {
+                fetch('/lecture_code_barre', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code_barre: codeBarresValue })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('result').textContent = data.error;
+                    } else {
+                        const bouteilleData = data.data;
+                        let displayText = `Résultat pour le code-barres: ${bouteilleData.code_barres}\n`;
+                        displayText += `Numéro de machine: ${bouteilleData.numero_machine}\n`;
+                        displayText += `Description: ${bouteilleData.description}\n`;
+                        displayText += `Quantité: ${bouteilleData.quantite}\n`;
+                        displayText += `Emplacement: ${bouteilleData.emplacement}\n`;
+                        displayText += `Date d'ajout: ${bouteilleData.date_ajout}\n`;
+                        document.getElementById('result').textContent = displayText;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
-
 </html>

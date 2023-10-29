@@ -45,6 +45,22 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
+
+
+button[type="reset"],
+button[type="button"] {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button[type="reset"]:hover,
+button[type="button"]:hover {
+    background-color: #5a6268;
+}
     background-color: #0056b3;
 }
 
@@ -68,6 +84,27 @@ table td {
 }
 
 /* Style des résultats de recherche */
+
+
+/* Styles pour les notifications */
+.notification {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
 #result {
     margin-top: 20px;
     font-weight: bold;

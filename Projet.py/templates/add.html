@@ -1,24 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+        .notification.success {
+            color: green;
+        }
+        
+        .notification.error {
+            color: red;
+        }
+        </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter Bouteille</title>
 </head>
 <body>
-    <h2>Ajouter une nouvelle bouteille</h2>
-    <form action="/add" method="post">
+    <div class="container mt-5">
+        <a href="/" class="btn btn-secondary mb-3">Retour</a>
+        <h2 class="text-center mb-4">Ajouter une nouvelle bouteille</h2>
+    <form action="/add" method="post" class="text-center">
         <label for="code_barres">Code-barres:</label>
-        <input type="text" id="code_barres" name="code_barres">
+        <input type="text" id="code_barres" name="code_barres" class="form-control mb-3">
         <label for="numero_machine">Numéro machine:</label>
-        <input type="text" id="numero_machine" name="numero_machine">
+        <input type="text" id="numero_machine" name="numero_machine" class="form-control mb-3">
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description">
+        <input type="text" id="description" name="description" class="form-control mb-3">
         <label for="quantite">Quantité:</label>
-        <input type="text" id="quantite" name="quantite">
+        <input type="text" id="quantite" name="quantite" class="form-control mb-3">
         <label for="emplacement">Emplacement:</label>
-        <input type="text" id="emplacement" name="emplacement">
-        <input type="submit" value="Ajouter">
+        <input type="text" id="emplacement" name="emplacement" class="form-control mb-3">
+        <input type="submit" value="Ajouter" class="btn btn-primary mb-3">
+    <div id="notification" class="notification mt-3"></div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch('/add', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'Ajout réussi') {
+    document.getElementById('notification').classList.add('success');
+} else {
+    document.getElementById('notification').classList.add('error');
+}
+document.getElementById('notification').innerText = data;
+                event.target.reset();
+            });
+        });
+    </script>
     </form>
 </body>
 </html>
