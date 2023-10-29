@@ -109,3 +109,28 @@ table td {
     margin-top: 20px;
     font-weight: bold;
 }
+/* Ajustements pour les écrans plus petits */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+    }
+
+    #code_barres {
+        width: 100%;
+    }
+}
+
+body {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+input[type="text"],
+input[type="number"] {
+    max-width: 300px;
+}
