@@ -6,6 +6,7 @@
     <title>Modifier Bouteille</title>
 </head>
 <body>
+    <a href="/">Retour à l'accueil</a>
     <h2>Modifier la bouteille</h2>
     <form action="/edit/{{ bouteille[0] }}" method="post">
         <label for="code_barres">Code-barres:</label>
@@ -19,6 +20,8 @@
         <label for="emplacement">Emplacement:</label>
         <input type="text" id="emplacement" name="emplacement" value="{{ bouteille[5] }}">
         <input type="submit" value="Mettre à jour">
+        <br><br>
+        <a href="/">Retour à l'accueil</a>
     </form>
 </body>
 </html>

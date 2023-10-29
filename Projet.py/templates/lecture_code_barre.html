@@ -8,13 +8,14 @@
 </head>
 <body>
     <div class="container mt-5">
+        <h2 class="text-center mb-4">Lecture de Code-barre</h2>
         <a href="/" class="btn btn-secondary mb-3">Retour</a>
         <form id="searchForm" action="#" method="post" class="text-center">
-        <label for="code_barre">Entrez le code-barre:</label>
+        <label for="code_barre" class="font-weight-bold">Entrez le code-barre:</label>
         <input type="text" id="code_barre" name="code_barre" class="form-control mb-3">
         <input type="submit" value="Rechercher" class="btn btn-primary">
     </form>
-    <div id="result" class="mt-4 text-center"></div>
+    <div id="result" class="mt-4 text-center font-weight-bold"></div>
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
             event.preventDefault();
