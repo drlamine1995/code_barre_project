@@ -1,6 +1,8 @@
 version: '3.8'
 services:
   db:
+    command: postgres -c 'listen_addresses=*'
+    
     image: postgres:latest
     restart: always
     environment:
@@ -10,6 +12,8 @@ services:
       - '5432:5432'
     volumes:
       - ./data:/var/lib/postgresql/data
+    networks:
+      - my_custom_network
 
   phppgadmin:
     volumes:
@@ -23,10 +27,24 @@ services:
       - "8080:80"
     depends_on:
       - db
+    networks:
+      - my_custom_network
 
   app:
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+    
     image: webapp_code_barre
     ports:
       - "5000:5000"
     depends_on:
       - db
+    networks:
+      - my_custom_network
+
+networks:
+  my_custom_network:
+    external: true
