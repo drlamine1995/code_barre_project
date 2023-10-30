@@ -1,15 +1,22 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import psycopg2
-
+import os
 app = Flask(__name__)
 
 # Paramètres de connexion à la base de données
+
+
+DATABASE_HOST = os.environ.get('DATABASE_HOST')
+DATABASE_PORT = os.environ.get('DATABASE_PORT')
+DATABASE_USER = os.environ.get('DATABASE_USER')
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD')
 db_params = {
-    'host': 'localhost',
-    'database': 'postgres',
-    'user': 'postgres',
-    'password': 'postgres'
+    'host': DATABASE_HOST,
+    'user': DATABASE_USER,
+    'password': DATABASE_PASSWORD,
+    'port': DATABASE_PORT
 }
+
 
 def connect_to_database():
     try:

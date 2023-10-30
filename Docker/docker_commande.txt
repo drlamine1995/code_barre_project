@@ -9,6 +9,10 @@ Toutes les ressources créées lors de l'exécution de docker-compose up seront 
 docker-compose down est utile lorsque vous avez terminé de travailler avec vos services et que vous souhaitez libérer les ressources.
 
 
+docker-compose down
+docker-compose up -d
+
+
 -- Créez la séquence
 CREATE SEQUENCE bouteilles_de_gaz_id_seq;
 

@@ -9,6 +9,7 @@ WORKDIR /app
 COPY . /app
 
 # Installez les dépendances
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Exposez le port sur lequel votre application s'exécutera

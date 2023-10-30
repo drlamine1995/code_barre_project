@@ -2,7 +2,6 @@ version: '3.8'
 services:
   db:
     command: postgres -c 'listen_addresses=*'
-    
     image: postgres:latest
     restart: always
     environment:
@@ -29,6 +28,27 @@ services:
       - db
     networks:
       - my_custom_network
+  
+  metabase:
+    image: metabase/metabase:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=postgres
+      - MB_DB_PORT=5432
+      - MB_DB_USER=postgres
+      - MB_DB_PASS=postgres
+      - MB_DB_HOST=db
+    volumes:
+      - ./metabase:/metabase-data
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - my_custom_network
+
 
   app:
     environment:
